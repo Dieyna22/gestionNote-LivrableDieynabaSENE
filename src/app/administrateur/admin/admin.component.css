@@ -1,0 +1,10 @@
+.btnProf, .btnEtudiant{
+    background-color: #fff;
+    color: #D9B;
+    font-weight: bold;
+}
+
+.fond-btn {
+    background-color: #D9B;
+    color: #fff !important;
+}

@@ -1,0 +1,188 @@
+<div class="container-fluid" >
+<body cz-shortcut-listen="true">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#d9b ; border: 1px solid rgb(239, 237, 237);">
+        <div class="container-fluid ">
+          <div><a href=""><img src="../../assets/logo.png" alt="" style="width: 20%;"></a></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div>
+            <ul>
+              <li class="nav-item dropdown text-light">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: rgb(8, 85, 77);">
+                 {{ApprenantConnect.anneeScolaire |date:'YYYY'}} 
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li><a class="dropdown-item" href="#">2020-2021</a></li>
+                  <li><a class="dropdown-item" href="#">2021-2022</a></li>
+                  <li><a class="dropdown-item" href="#">2022-2023</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+   
+      <!-- <div class="semestre d-flex justify-content-center "  *ngIf="showSemestre">
+        <button type="button" class="btn btn-secondary ms-10  w-100" (click)="affichesem()" >{{buttontext}}
+        </button>
+        {{Semestre1}}
+  
+        </div>
+        <div class="semestre d-flex justify-content-center "  *ngIf="!showSemestre">
+          <button type="button" class="btn btn-primary  w-100" (click)="affichesem()" >{{buttontext}}
+          </button>
+          {{Semestre1}}
+          <div *ngIf="!showSemestre">
+            <tbody>
+            <tr *ngFor="let note of tabNotes">
+              <td id="titre">{{note.matiere}}</td>
+              <td class="text-center" id="titre"><span>{{note.valeur}}</span></td>
+              <td class="text-center" id="titre"><span >{{note.valeur}}</span></td>
+            </tbody>
+          </div>
+            
+          </div> -->
+    <main >
+      <h1 class="visually-hidden"></h1>
+    
+      <div class="d-flex flex-column flex-shrink-0 p-3 text-white " style="width: 280px; height: 500px; background-color: #d9b;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+          
+        </a>
+        <div class="dropdown">
+              <img [src]="ApprenantConnect.imageApprenant" alt="" width="100" height="100" class="rounded-circle ms-5"><h3 class="user ms-5">{{ApprenantConnect.prenomApprenant}} {{ApprenantConnect.nomApprenant}}</h3>
+              <!-- <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">mdo</font></font></strong> -->
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+              <li><a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Profil</font></font></a></li>
+              <li><a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">se déconnecter</font></font></a></li>
+            </ul>
+            <svg class="bi " width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+          <span class="fs-4 ms-2">connection</span>
+          <a href="#" class="d-flex-colum text-white text-decoration-none dropdown-toggle ms-4" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+          </a>
+          </div>
+          
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <!-- <li class="nav-item">
+            <a href="#" class="nav-link " aria-current="page">
+              <svg class="bi me-2" width="16" height="16" ><use xlink:href="#home"></use></svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+              Maison
+            </font></font></a>
+          </li> -->
+          <li>
+            <a href="#" class="nav-link text-white">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+              Tableau de bord
+            </font></font></a>
+          </li>
+          <li>
+            <a style="cursor: pointer;" class="nav-link text-white" (click)= "Afficher()">
+              <svg class="bi me-2" width="16" height="16" ><use xlink:href="#table"></use></svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit; ">
+              Semestre1 
+            </font></font></a>
+          </li>
+          <li>
+            <a  style="cursor: pointer;" class="nav-link text-white"  (click)="Afficher()">
+              <svg class="bi me-2" width="16" height="16" style="background-color: aqua;"><use xlink:href="#grid"></use></svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+             Semestre2
+            </font></font></a>
+          </li>
+        </ul>
+        <hr>
+            
+      </div>
+    
+ 
+      
+      
+      
+      <div [class]="tabNotes" *ngIf="showDevoir==showSemestre">
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th >Matieres </th>
+              <th class="text-center">Devoir  <i class="bi bi-pencil-square"></i></th>
+              <th class="text-center">Examen <i class="bi bi-pencil-square"></i></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let note of tabNotes">
+              <td id="titre">{{note.matiere}}</td>
+              <td class="text-center" id="titre"><span>{{note.valeur}}</span></td>
+              <td class="text-center" id="titre"><span >{{note.valeur}}</span></td>
+            <!-- </tr>
+            <tr>
+              <td>Angular</td>
+              <td class="text-center"><span>9</span></td>
+              <td class="text-center"><span>18</span></td>
+            </tr>
+            <tr>
+              <td id="titre">Gestion de Projet</td>
+              <td class="text-center" id="titre"><span >11</span></td>
+              <td class="text-center" id="titre"><span>14</span></td>
+            </tr>
+            <tr>
+              <td>Javascripte</td>
+              <td class="text-center"><span >10</span></td>
+              <td class="text-center"><span >17</span></td>
+            </tr> -->
+            <!-- <tr>
+              <td id="titre">Maquettage</td>
+              <td  class="text-center" id="titre" ><span >12</span></td>
+              <td class="text-center" id="titre"><span >13</span></td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="!showDevoir">
+        <div class="card-body ">
+          <table class="table">
+            <thead>
+              <tr>
+                <th >Matieres </th>
+                <th class="text-center">Devoir<i class="bi bi-pencil-square "></i>
+                  <th class="text-center">Examen <i class="bi bi-pencil-square"></i>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="titre">Math</td>
+                <td class="text-center" id="titre"><span>16</span></td>
+                <td class="text-center" id="titre"><span >20</span></td>
+              </tr>
+              <tr>
+                <td>Français</td>
+                <td class="text-center"><span>9</span></td>
+                <td class="text-center"><span>18</span></td>
+              </tr>
+              <tr>
+                <td id="titre">Histoir/Geographie</td>
+                <td class="text-center" id="titre"><span >11</span></td>
+                <td class="text-center" id="titre"><span>14</span></td>
+              </tr>
+              <tr>
+                <td>Math</td>
+                <td class="text-center"><span >10</span></td>
+                <td class="text-center"><span >17</span></td>
+              </tr>
+              <tr>
+                <td id="titre">SVT</td>
+                <td  class="text-center" id="titre" ><span >12</span></td>
+                <td class="text-center" id="titre"><span >13</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    
+    
+
+    <app-user-footer></app-user-footer>
+    </body>
+  </div>

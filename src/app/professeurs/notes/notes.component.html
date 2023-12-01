@@ -1,0 +1,85 @@
+<!-- <app-user-header></app-user-header> -->
+
+<div class="container mt-5">
+  <button class="btn my-5 py-2 fw-bold" (click)="openModal(noteModalContent)" style="background-color: #D9b; color: white;">
+    Enregistrer une note
+  </button>
+  <ng-template #noteModalContent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Enregistrement de la note</h4>
+      <button type="button" class="close btn btn-outline-danger" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="noteForm">
+        <div class="mb-3">
+          <label for="semestre" class="form-label">Semestre</label>
+          <input type="number" id="semestre" formControlName="semestre" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label for="annee_scolaire" class="form-label">Année Scolaire</label>
+          <input type="date" id="annee_scolaire" formControlName="annee_scolaire" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label for="type_note" class="form-label">Type de Note</label>
+          <input type="text" id="type_note" formControlName="type_note" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label for="matiere" class="form-label">Matière</label>
+          <input type="text" id="matiere" formControlName="matiere" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label for="apprenant" class="form-label">Apprenant</label>
+          <input type="text" id="apprenant" formControlName="apprenant" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label for="valeur" class="form-label">Valeur</label>
+          <input type="number" id="valeur" formControlName="valeur" class="form-control">
+        </div>
+
+        <button type="button" class="btn btn-success" (click)="saveNote()">Enregistrer la note</button>
+      </form>
+    </div>
+  </ng-template>
+
+  <div class="table-responsive overflow-y-scroll mt-2" style="height: 55vh;">
+    <table class="table align-items-center  p-2">
+      <thead class="sticky-top fond-bleu">
+        <tr class="">
+            <th scope="col" class="fond-bleu text-white">Semestre</th>
+            <th scope="col" class="fond-bleu text-white">Année Scolaire</th>
+            <th scope="col" class="fond-bleu text-white">Type de Note</th>
+            <th scope="col" class="fond-bleu text-white">Matière</th>
+            <th scope="col" class="fond-bleu text-white">Apprenant</th>
+            <th scope="col" class="fond-bleu text-white">Valeur</th>
+            <th scope="col" class="fond-bleu text-white">Actions</th>
+          </tr>
+      </thead>
+      <tbody>
+        <ng-container class="">
+          <tr *ngFor="let note of notes; let i = index">
+            <td>{{ note.semestre }}</td>
+            <td>{{ note.annee_scolaire }}</td>
+            <td>{{ note.type_note }}</td>
+            <td>{{ note.matiere }}</td>
+            <td>{{ note.apprenant }}</td>
+            <td>{{ note.valeur }}</td>
+            <td>
+              <button class="btn btn-outline-secondary me-5" (click)="openEditModal(noteModalContent, i)">✏</button>
+              <button class="btn btn-outline-secondary me-3" (click)="deleteNoteAndClose(i)">❌</button>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- <app-user-footer></app-user-footer> -->
+

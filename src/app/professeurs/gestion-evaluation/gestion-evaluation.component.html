@@ -1,0 +1,144 @@
+<app-header-admin></app-header-admin>
+<!-- Bouton pour ouvrir le modal -->
+<div class="">
+  <div class="row">
+    <div class="col-12 col-md-2 p-0 sidebarContainer">
+      <div class="d-flex sidebar flex-column flex-shrink-0 p-2">
+        <a href="/" class="text-center fw-bold fs-4  text-white text-decoration-none">
+          <span class="fs-4">{{formateurConnect.prenomF}} {{formateurConnect.nomF}}</span>  
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li [ngClass]="{'fond-bleu': boutonActif === 1}">
+            <a class="nav-link text-white" (click)="changeNavItem('evaluations');boutonActif = 1">
+              liste des evaluations
+            </a>
+          </li>
+          <li [ngClass]="{'fond-bleu': boutonActif === 2}">
+            <a class="nav-link text-white" (click)="changeNavItem('notes');boutonActif = 2">
+              liste des notes
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-12 col-md-10">
+      <div id="evaluations" *ngIf="selectedNavItem === 'evaluations'">
+        <button class="btn my-5 py-2 fw-bold " (click)="openModal(yourModalContent)" style="background-color: #D9b; color: white;">Enregistrer une évaluation</button>
+
+        <!-- Modal -->
+        <ng-template #yourModalContent let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Enregistrement d'évaluation</h4>
+            <button type="button" class="close btn btn-outline-danger" aria-label="Close" (click)="closeModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Formulaire d'enregistrement -->
+            <form (ngSubmit)="saveEvaluation()" #evaluationForm="ngForm">
+              <div class="mb-3">
+                <label for="classe" class="form-label">classe</label><br>
+                <select class="form-select" name="classe" aria-label="Default select example"
+                  [(ngModel)]="evaluationFormModel.classe">
+                  <option selected>{{formateurConnect.classeF}}</option>
+                </select>
+                <!-- <input type="text" id="semester" name="semester" class="form-control" [(ngModel)]="evaluationFormModel.semester" required> -->
+              </div>
+
+              <div class="mb-3">
+                <label for="semester" class="form-label">Semester</label>
+                <select class="form-select" aria-label="Default select example" name="semester"
+                  [(ngModel)]="evaluationFormModel.semester">
+                  <option selected>Choisisez un Semestre</option>
+                  <option value="1">Semestre 1</option>
+                  <option value="2">Semestre 2</option>
+                </select>
+                <!-- <input type="text" id="semester" name="semester" class="form-control" [(ngModel)]="evaluationFormModel.semester" required> -->
+              </div>
+
+              <div class="mb-3">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" id="date" name="date" class="form-control" [(ngModel)]="evaluationFormModel.date" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="type" class="form-label">Type</label>
+                <select class="form-select" aria-label="Default select example" name="type" [(ngModel)]="evaluationFormModel.type">
+                  <option selected>Choisisez un type</option>
+                  <option value="devoir">Devoir</option>
+                  <option value="examen">Examen</option>
+                </select>
+                <!-- <input type="text" id="type" name="type" class="form-control" [(ngModel)]="evaluationFormModel.type" required> -->
+              </div>
+
+              <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" aria-label="Default select example" name="status" [(ngModel)]="evaluationFormModel.status">
+                  <option selected>Choisisez un type</option>
+                  <option value="en_cours">En cours</option>
+                  <option value="reportee">Reportée</option>
+                  <option value="faite">Faite</option>
+                </select>
+                <!-- <input type="text" id="status" name="status" class="form-control" [(ngModel)]="evaluationFormModel.status" required> -->
+              </div>
+
+              <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <select class="form-select" name="subject" aria-label="Default select example"
+                  [(ngModel)]="evaluationFormModel.subject">
+                  <option selected>{{formateurConnect.matiereF}}</option>
+                </select>
+                <!-- <input type="text" id="subject" name="subject" class="form-control" [(ngModel)]="evaluationFormModel.subject" required> -->
+              </div>
+
+              <button type="submit" class="btn save">Enregistrer l'évaluation</button>
+            </form>
+          </div>
+        </ng-template>
+
+        <div class="table-responsive overflow-y-scroll mt-2" style="height: 55vh;">
+          <table class="table align-items-center  p-2">
+            <thead class="sticky-top fond-bleu">
+              <tr class="">
+                <th scope="col" class="fond-bleu text-white">Semestre</th>
+                <th scope="col" class="fond-bleu text-white">Date</th>
+                <th scope="col" class="fond-bleu text-white">Type</th>
+                <th scope="col" class="fond-bleu text-white">Statut</th>
+                <th scope="col" class="fond-bleu text-white">Matière</th>
+                <th scope="col" class="fond-bleu text-white">Note</th>
+                <th scope="col" class="fond-bleu text-white">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container class="">
+                <tr *ngFor="let evaluation of evaluations; let i = index">
+                  <td>{{ evaluation.semester }}</td>
+                  <td>{{ evaluation.date }}</td>
+                  <td>{{ evaluation.type }}</td>
+                  <td>{{ evaluation.status }}</td>
+                  <td>{{ evaluation.subject }}</td>
+                  <td>
+                    <input class="me-5" type="number" [(ngModel)]="evaluation.grade" />
+                    <button class="btn btn-outline-secondary me-0" (click)="assignGrade(i, evaluation.grade)">✅
+                    </button>
+                  </td>
+                  <td>
+                    <button class="btn btn-outline-danger" (click)="deleteEvaluation(i)">❌</button>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div  id="notes" *ngIf="selectedNavItem === 'notes'">
+        <app-notes></app-notes>
+      </div>
+
+    </div>
+  </div>
+</div>
+<app-user-footer></app-user-footer>
+<!-- noel j'ai encore fait un push et tu me dit de recommencer -->
+<!-- je vais te taper hein -->

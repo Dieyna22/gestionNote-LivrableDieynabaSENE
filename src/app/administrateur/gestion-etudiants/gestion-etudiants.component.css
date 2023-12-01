@@ -1,0 +1,12 @@
+.sidebar {
+    height: 75vh;
+}
+ .trait {
+     border: 2px solid #DD99BB;
+     width: 20%;
+     margin: 0 auto;
+ }
+ 
+ .nav-pills a {
+     cursor: pointer;
+ }

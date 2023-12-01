@@ -1,0 +1,52 @@
+<app-header-admin ></app-header-admin>
+
+
+<div class="row m-2 p-1">
+    <div class="col-12 col-md-3">
+        <div class="shadow">
+            <button class="btn  btnProf w-100" [ngClass]="{'fond-btn': boutonActif === 1}"
+                (click)="showComponant('gestionProfs')" (click)="boutonActif = 1">Gestion Formateurs
+            </button>
+        </div>
+    </div>
+    <div class="col-12 col-md-3">
+        <div class=" shadow">
+            <button class="btn  btnEtudiant w-100" [ngClass]="{'fond-btn': boutonActif === 2}"
+                (click)="showComponant('gestionEtud')" (click)="boutonActif = 2">Gestion Etudiants
+            </button>
+        </div>
+    </div>
+    <div class="col-12 col-md-3">
+        <div class=" shadow">
+            <button class="btn  btnProf w-100" [ngClass]="{'fond-btn': boutonActif === 3}"
+                (click)="showComponant('gestionMatieres')" (click)="boutonActif = 3">Gestion Matieres
+            </button>
+        </div>
+    </div>
+    <div class="col-12 col-md-3">
+        <div class=" shadow">
+            <button class="btn  btnProf w-100" [ngClass]="{'fond-btn': boutonActif === 4}"
+                (click)="showComponant('gestionClasses')" (click)="boutonActif = 4">Gestion Classes
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="navAdmin container-fluid d-flex justify-content-end p-0">
+    <button class="btn  btnProf m-2" [ngClass]="{'fond-bleu': boutonActif === 1}" 
+    (click)="showComponant('gestionProfs')" (click)="boutonActif = 1" >Gestion Formateurs</button>
+    <button class="btn  btnEtudiant m-2" [ngClass]="{'fond-bleu': boutonActif === 2}"
+    (click)="showComponant('gestionEtud')" (click)="boutonActif = 2" >Gestion Etudiants</button>
+    <button class="btn  btnProf m-2" [ngClass]="{'fond-bleu': boutonActif === 3}"
+    (click)="showComponant('gestionMatieres')" (click)="boutonActif = 3" >Gestion Matieres</button>
+    <button class="btn  btnProf m-2" [ngClass]="{'fond-bleu': boutonActif === 4}"
+    (click)="showComponant('gestionClasses')" (click)="boutonActif = 4" >Gestion Classes</button>
+</div> -->
+
+<app-gestion-profs class="gestionProfs" id="gestionProfs"  *ngIf="currentContent === 'gestionProfs'"></app-gestion-profs>
+<app-gestion-etudiants class="gestionEtud" id="gestionEtud" *ngIf="currentContent === 'gestionEtud'"></app-gestion-etudiants>
+<app-gestion-matieres class="gestionMatieres" id="gestionMatieres" *ngIf="currentContent === 'gestionMatieres'"></app-gestion-matieres>
+<app-gestion-classes class="gestionClasses" id="gestionClasses" *ngIf="currentContent === 'gestionClasses'"></app-gestion-classes>
+<app-footer-admin></app-footer-admin>
+

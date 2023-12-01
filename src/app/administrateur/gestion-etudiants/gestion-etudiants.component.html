@@ -1,0 +1,186 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-2 p-0 sidebarContainer">
+            <div class="d-flex sidebar flex-column flex-shrink-0 p-2">
+                <a href="/" class="text-center fw-bold fs-4  text-white text-decoration-none">
+                    <span class="fs-4">Gestion Notes</span>
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto"  >
+                    <li [ngClass]="{'fond-bleu': boutonActif === 1}">
+                        <a class="nav-link text-white" (click)="changeNavItem('apprenants');boutonActif = 1" >
+                            liste des apprenants
+                        </a>
+                    </li>
+                    <li [ngClass]="{'fond-bleu': boutonActif === 2}" >
+                        <a class="nav-link text-white" (click)="changeNavItem('desactiver');boutonActif = 2">
+                            Apprenants désactivés
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-12 col-md-10">
+            <div class="listeApprenant" id="apprenants" *ngIf="selectedNavItem === 'apprenants'">
+                <h4 class="text-center fw-bold mt-2 titre">Liste Apprenants</h4>
+                <div class="trait"></div>
+
+                <!-- Button modal Ajout Apprenants -->
+                <button type="button" class="btn btn-white active mt-2 btnAjt" data-bs-toggle="modal" data-bs-target="#AjoutApprenants">
+                    Ajout Apprenants
+                </button>
+
+                <div class="table-responsive overflow-y-scroll mt-2" style="height: 55vh;">
+                    <table class="table align-items-center  p-2">
+                        <thead class="sticky-top fond-bleu">
+                            <tr class="">
+                                <th scope="col" class="fond-bleu text-white">Profil</th>
+                                <th scope="col" class="fond-bleu text-white">Prénom Apprenant</th>
+                                <th scope="col" class="fond-bleu text-white">Nom Apprenant</th>
+                                <th scope="col" class="fond-bleu text-white">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let apprenant of tabApprenants" class="">
+                                <tr *ngIf=" apprenant.etatApprenant==1">
+                                    <td>
+                                        <img [src]="apprenant.imageApprenant" alt="" class="img-fluid" style="height: 50px; width: 50px;">
+                                    </td>
+                                    <td>
+                                        {{apprenant.nomApprenant}}
+                                    </td>
+                                    <td>
+                                        {{apprenant.prenomApprenant}}
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-white active me-2 btnAjt" data-bs-toggle="modal" data-bs-target="#DetailsApprenants"
+                                            (click)="details(apprenant.idApprenant)">Détails</button>
+                                        <button class="btn fond-bleu text-light fw-bold" (click)="Desactiver(apprenant)">Désactiver</button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="listeApprenantDesactiver" id="desactiver" *ngIf="selectedNavItem === 'desactiver'">
+                <h4 class="text-center fw-bold mt-3 titre">Liste Apprenants Désactiver</h4>
+                <div class="trait"></div>
+
+                <div class="table-responsive overflow-y-scroll mt-2" style="height: 55vh;">
+                    <table class="table align-items-center  p-2">
+                        <thead class="sticky-top fond-bleu">
+                            <tr class="">
+                                <th scope="col" class="fond-bleu text-white">Profil</th>
+                                <th scope="col" class="fond-bleu text-white">Prénom Apprenant</th>
+                                <th scope="col" class="fond-bleu text-white">Nom Apprenant</th>
+                                <th scope="col" class="fond-bleu text-white">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let apprenant of tabApprenants" class="">
+                                <tr *ngIf=" apprenant.etatApprenant==0">
+                                    <td>
+                                        <img [src]="apprenant.imageApprenant" alt="" class="img-fluid"
+                                            style="height: 50px; width: 50px;">
+                                    </td>
+                                    <td>
+                                        {{apprenant.nomApprenant}}
+                                    </td>
+                                    <td>
+                                        {{apprenant.prenomApprenant}}
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-white active btnAjt fw-bold" (click)="activer(apprenant)">Activer</button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Ajout Apprenants -->
+<div class="modal fade" id="AjoutApprenants" tabindex="-1" aria-labelledby="AjoutApprenantsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 titre" id="AjoutApprenantsLabel">Ajout Apprenants</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="nameInput" class="form-label">Nom: </label>
+                                <input type="text" name="name" class="form-control" id="nameInput" [(ngModel)]="name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="prenomInput" class="form-label">Prenom: </label>
+                                <input type="text" name="prenom" class="form-control" id="prenomInput" [(ngModel)]="prenom">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="emailInput" class="form-label">Adresse email:</label>
+                                <input type="email" name="email" class="form-control" id="emailInput" [(ngModel)]="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="passwordInput" class="form-label">Mot de passe: </label>
+                                <input type="password" name="password" class="form-control" id="passwordInput" [(ngModel)]="password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imageInput" class="form-label">Url de l'image: </label>
+                        <input type="text" name="image" class="form-control" id="imageInput" [(ngModel)]="image">
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select" aria-label="Default select example" name="valeur" [(ngModel)]="valeur">
+                            <option selected>Choisisez une classe</option>
+                            <option *ngFor="let donnee of db" [value]="donnee.nom">{{donnee.nom}}</option>    
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn save" (click)=" ajoutApprenantsValider()">Ajout</button>
+                <button type="button" class="btn close" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Details Apprenants -->
+<div class="modal fade" id="DetailsApprenants" tabindex="-1" aria-labelledby="DetailsApprenantsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 titre" id="DetailsApprenantsLabel">Details Apprenants</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            <img class="img-fluid"
+                                [src]="currentApprenant?.imageApprenant"
+                                alt="">
+                        </div>
+                        <div class="col-12 col-md-9 p-2">
+                            <h4>{{currentApprenant?.prenomApprenant}} {{currentApprenant?.nomApprenant}}</h4>
+                            <p>{{currentApprenant?.niveau}} </p>
+                            <p>{{currentApprenant?.anneeScolaire | date:'YYYY'}}</p> 
+                        </div>
+                    </div>
+            </div> 
+            <div class="modal-footer">
+                <button type="button" class="btn close" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

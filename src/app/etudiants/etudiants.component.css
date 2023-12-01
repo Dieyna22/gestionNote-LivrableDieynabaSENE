@@ -1,0 +1,21 @@
+main{
+    display: flex;
+}
+#titre{
+    background-color:  rgb(244, 240, 240);
+}
+table{
+    width: 292%;
+    border: 1px solid #000;
+    margin-top: 1%;
+}
+@media screen and (max-width: 768px){
+    .container-fluid{
+        display: grid;
+        grid-template-columns: auto;
+    }
+}
+/* .matier{
+    background-color: rgb(227, 152, 145);
+    padding: 10px;
+} */

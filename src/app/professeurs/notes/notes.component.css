@@ -1,0 +1,25 @@
+
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  /* color:white; */
+}
+
+th {
+  background-color: #D9B ;
+}
+
+button {
+  cursor: pointer;
+  padding: 5px 10px;
+}
+.contenu{
+/* display: flex;
+justify-content: center; */
+/* border: 2px solid red; */
+margin-left: 20%;
+
+
+}

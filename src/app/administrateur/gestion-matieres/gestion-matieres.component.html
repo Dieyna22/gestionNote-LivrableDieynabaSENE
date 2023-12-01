@@ -1,0 +1,141 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-2 p-0 sidebarContainer">
+            <div class="d-flex sidebar flex-column flex-shrink-0 p-2">
+                <a class="text-center fw-bold fs-4  text-white text-decoration-none">
+                    Tableau de bord
+                </a>
+                <hr>
+
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item my-2" [ngClass]="{'fond-bleu': boutonActif === 1}"
+                        (click)="showContent('listeFormateurs')" (click)="boutonActif = 1">
+                        <a class="nav-link text-white">
+                            Liste des matiéres
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-12 col-md-10 border">
+            <div class="apercuForm p-2" id="apercuForm" *ngIf="currentContent === 'apercuForm'">
+                <h4 class="text-center titre">Aperçu des Matiéres</h4>
+
+            </div>
+
+            <div class="listeFormateurs p-2" id="listeFormateurs" *ngIf="currentContent === 'listeFormateurs'">
+
+                <h4 class="text-center fw-bold titre">Liste des matiéres</h4>
+                <div class="trait"></div>
+                <button class="btn btn-white btnAjt active text-light mt-2 mb-2" data-bs-toggle="modal"
+                    data-bs-target="#ajoutMatiere" type="submit">Ajouter une matiére
+                </button>
+
+
+                <div class="table-responsive overflow-y-scroll mt-5" style="height: 50vh;">
+                    <table class="table align-items-center table-flush">
+                        <thead class="sticky-top">
+                            <tr class="">
+                                <th scope="col" class="fond-bleu text-white">Nom de la Matiére</th>
+                                <th scope="col" class="fond-bleu text-white">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let matiere of tabMatiere" class="">
+                                <tr>
+                                    <td>
+                                        <p>{{matiere.nomMatiere}}</p>
+                                    </td>
+                                    <td>
+                                        <button class="btn btnDet active" data-bs-toggle="modal" data-bs-target="#detailMatiere"
+                                            (click)="detailMatiere(matiere.idMatiere)">Détails
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="detailMatiere">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 fw-bold titre">Détail matiére</h1>
+                <button type="button" class="btn-close fond-bleu text-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 p-2">
+                        <h4>
+                            <span class="titre fw-bold ">Matiére: </span><br>
+                             {{currentMatiere?.nomMatiere}} 
+                        </h4>
+                        <p>
+                            <span class="titre fw-bold fs-4">Description: </span><br>
+                             {{currentMatiere?.descriptionMatiere}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn fond-bleu text-light" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- Modal ajout Matiere -->
+<div class="modal fade" id="ajoutMatiere">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 fw-bold titre">Ajouter une matiére</h1>
+                <button type="button" class="btn-close fond-bleu text-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+
+                            <div class="mb-3">
+                                <label for="nomMatiere" class="form-label">Renseigner le nom de la matiére: </label>
+                                <input type="text" class="form-control" id="nomMatiere" name="nomMatiere" [(ngModel)]="nomMatiere" >
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="descriptionMatiere" class="form-label">Description de la matiére: </label>
+                                <input type="text" class="form-control" id="descriptionMatiere" name="descriptionMatiere" [(ngModel)]="descriptionMatiere">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Envoi du formulaire -->
+                    <div class="d-flex justify-content-end">
+                        <button class="btn fond-bleu text-light" type="submit" data-bs-dismiss="modal" (click)="ajoutMatiere()">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal ajout Matiere -->

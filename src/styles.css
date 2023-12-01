@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+@import "node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+.scroll-container {
+    max-height: 200px;
+    overflow-y: auto;
+    /* overflow-x: auto; */
+}
+
+@media (max-width: 767px){
+    .sidebar{
+        height: 100% !important;
+    }
+}
+
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+.sidebarContainer{
+    background-color: #D9B;
+    color: white;
+}
+
+.fond-bleu a {
+    background-color: #fff;
+    color: #D9B !important;
+}
+
+.fond-bleu {
+    background-color: #DD99BB !important;
+}
+
+.btnAjt {
+    color: #DD99BB !important;
+}
+
+.btnDet {
+    background-color: white;
+    color: #DD99BB;
+}
+
+.titre {
+    color: #DD99BB;
+}
+
+.save{
+    background-color: #DD99BB !important;
+    color: #fff !important;
+}
+
+.close{
+    background-color: #F2D4CC !important;
+    color: #fff !important;
+}
